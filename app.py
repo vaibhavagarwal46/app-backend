@@ -23,8 +23,16 @@ jwt = JWTManager(app)
 # Initialize SocketIO
 socketio = SocketIO(app, cors_allowed_origins="*", transports=['websocket'])
 
+# Get the URI from environment variables
 MONGO_URI = os.getenv("MONGO_URI")
+
+if not MONGO_URI:
+    print("CRITICAL ERROR: MONGO_URI environment variable is not set!")
+    # Stop the app so it doesn't try to connect to localhost
+    exit(1) 
+
 client = MongoClient(MONGO_URI)
+db = client.get_database()
 
 # Safely resolve default database routing fallbacks
 try:
