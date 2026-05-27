@@ -35,7 +35,7 @@ client = MongoClient(MONGO_URI)
 db = client.get_database()
 
 # Force the database name explicitly
-db_name = os.getenv("DB_NAME", "neighborhood")
+db_name = os.getenv("DB_NAME", "vaibhavagarwal478_db_user")
 db = client[db_name]
 
 # Configure Gemini AI
