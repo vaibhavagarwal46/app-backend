@@ -34,11 +34,9 @@ if not MONGO_URI:
 client = MongoClient(MONGO_URI)
 db = client.get_database()
 
-# Safely resolve default database routing fallbacks
-try:
-    db = client.get_database()
-except ConfigurationError:
-    db = client["shakti-traders"]
+# Force the database name explicitly
+db_name = os.getenv("DB_NAME", "neighborhood")
+db = client[db_name]
 
 # Configure Gemini AI
 genai.configure(api_key=os.getenv("GEMINI_API_KEY"))
