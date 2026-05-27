@@ -6,3 +6,4 @@ pymongo
 python-dotenv
 google-generativeai
 gunicorn
+eventlet
